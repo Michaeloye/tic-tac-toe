@@ -7,6 +7,7 @@ function App() {
     <div className="App">
       <Header />
       <Board />
+      <p className="turn-mobile">Player 1's Turn</p>
     </div>
   );
 }
