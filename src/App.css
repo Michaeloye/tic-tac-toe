@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: hsl(0, 0%, 27%);
+  background-color: hsl(210, 34%, 13%);
   min-height: 100vh;
 }
 
@@ -22,29 +22,51 @@
   border-radius: 5px;
   text-align: center;
 }
-.score {
+.player {
   margin-top: 10px;
-  color: blue;
+  color: hsl(214, 32%, 60%);
   font-weight: 600;
 }
 .number {
   margin-top: -15px;
   font-size: 30px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .board {
   display: grid;
-  grid-template-columns: 100px 100px 100px;
-  grid-template-rows: 100px 100px 100px;
-  grid-gap: 10px;
-  background-color: #fff;
+  margin: auto;
+  margin-top: 30px;
+  grid-template-columns: 90px 90px 90px;
+  grid-template-rows: 90px 90px 90px;
+  justify-content: center;
+  align-content: center;
+  gap: 10px;
+  background-color: transparent;
   color: #444;
 }
-@keyframes App-logo-spin {
+.cell {
+  background-color: hsl(214, 32%, 30%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  outline: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+@media screen and (min-width: 620px) {
+  .board {
+    grid-template-columns: 110px 110px 110px;
+    grid-template-rows: 110px 110px 110px;
+    gap: 13px;
+  }
+}
+
+/* @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
-}
+} */
