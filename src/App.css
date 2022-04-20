@@ -1,7 +1,45 @@
 .App {
   text-align: center;
+  background-color: hsl(0, 0%, 27%);
+  min-height: 100vh;
 }
 
+.heading {
+  margin: 0 auto;
+  border: 3px solid hsl(217, 16%, 45%);
+  border-radius: 7px;
+  width: 80%;
+  max-width: 580px;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+}
+.score-board {
+  background-color: white;
+  height: 90%;
+  width: 100px;
+  margin: auto;
+  border-radius: 5px;
+  text-align: center;
+}
+.score {
+  margin-top: 10px;
+  color: blue;
+  font-weight: 600;
+}
+.number {
+  margin-top: -15px;
+  font-size: 30px;
+  font-weight: 700;
+}
+.board {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px;
+  grid-gap: 10px;
+  background-color: #fff;
+  color: #444;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
