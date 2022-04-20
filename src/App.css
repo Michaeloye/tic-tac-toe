@@ -4,7 +4,7 @@
   min-height: 100vh;
 }
 
-.heading {
+.header {
   margin: 0 auto;
   border: 3px solid hsl(217, 16%, 45%);
   border-radius: 7px;
@@ -13,7 +13,12 @@
   height: 100px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
+.turn-desktop {
+  display: none;
+}
+
 .score-board {
   background-color: white;
   height: 90%;
@@ -54,7 +59,24 @@
   border-radius: 4px;
   cursor: pointer;
 }
-@media screen and (min-width: 620px) {
+.turn-mobile {
+  display: block;
+  color: white;
+  font-size: larger;
+  font-weight: 700;
+}
+
+@media screen and (min-width: 760px) {
+  .turn-desktop {
+    display: block;
+    color: white;
+    font-size: larger;
+    font-weight: 700;
+  }
+  .turn-desktop span {
+    display: block;
+    margin-top: 7px;
+  }
   .board {
     grid-template-columns: 110px 110px 110px;
     grid-template-rows: 110px 110px 110px;
