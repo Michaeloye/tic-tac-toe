@@ -3,7 +3,7 @@ import Cell from "./Cell";
 import VerdictModal from "./Modal/VerdictModal";
 import ResetButton from "./Reset";
 
-function Board() {
+function Board({ handleWhosTurn }) {
   const winningSequences = [
     [0, 1, 2],
     [3, 4, 5],
@@ -100,9 +100,11 @@ function Board() {
     }
     setIsX((prevState) => !prevState);
     setCellsFilled((prevState) => prevState + 1);
+    handleWhosTurn(isX ? "2" : "1");
   };
 
   const resetBoard = () => {
+    // reset ever state back to normal
     setIsX(true);
     setWinnerDeclared(false);
     setWinner(false);
@@ -110,6 +112,7 @@ function Board() {
     setShowX(false);
     setCellsFilled(0);
     setVerdict("");
+    handleWhosTurn("1");
   };
 
   const handleModal = (state) => {
