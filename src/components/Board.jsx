@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Cell from "./Cell";
+import ResetButton from "./Reset";
 
 function Board() {
   const winningSequence = [
@@ -79,20 +80,23 @@ function Board() {
     setShowX(false);
   };
   return (
-    <div className="board">
-      {/* instead of hardcording 9 Cell components it is cleaner to user map */}
-      {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-        <Cell
-          key={num}
-          isElementX={showX[`showX${num}`]}
-          isElementO={showO[`showO${num}`]}
-          onClick={() => {
-            handleCellClick(num);
-            console.log(showX);
-          }}
-        />
-      ))}
-    </div>
+    <>
+      <div className="board">
+        {/* instead of hardcording 9 Cell components it is cleaner to user map */}
+        {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+          <Cell
+            key={num}
+            isElementX={showX[`showX${num}`]}
+            isElementO={showO[`showO${num}`]}
+            onClick={() => {
+              handleCellClick(num);
+              console.log(showX);
+            }}
+          />
+        ))}
+      </div>
+      <ResetButton onClick={() => resetBoard()} />
+    </>
   );
 }
 
