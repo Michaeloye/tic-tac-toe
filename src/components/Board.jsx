@@ -53,6 +53,20 @@ function Board() {
     showX9: false,
   });
 
+  // this is needed to show the winning cells in green those making it unique to each cell
+  const [winner, setWinner] = useState({
+    winner0: false,
+    winner1: false,
+    winner2: false,
+    winner3: false,
+    winner4: false,
+    winner5: false,
+    winner6: false,
+    winner7: false,
+    winner8: false,
+    winner9: false,
+  });
+
   const handleCellClick = (num) => {
     if (isX && !showX[`showX${num}`]) {
       setShowX({
@@ -78,9 +92,10 @@ function Board() {
   };
 
   const resetBoard = () => {
+    setIsX(true);
+    setWinner(false);
     setShowO(false);
     setShowX(false);
-    setIsX(true);
     setCellsFilled(0);
   };
 
@@ -94,18 +109,36 @@ function Board() {
         showO[`showO${cell2}`] &&
         showO[`showO${cell3}`]
       ) {
+        setWinner({
+          ...winner,
+          [`winner${cell1}`]: true,
+          [`winner${cell2}`]: true,
+          [`winner${cell3}`]: true,
+        });
+        // setShowO({
+        //   ...showO,
+        //   [`showO${num}`]: true,
+        // });
         console.log("player 2 wins");
       } else if (
         showX[`showX${cell1}`] &&
         showX[`showX${cell2}`] &&
         showX[`showX${cell3}`]
       ) {
+        setWinner({
+          ...winner,
+          [`winner${cell1}`]: true,
+          [`winner${cell2}`]: true,
+          [`winner${cell3}`]: true,
+        });
+
         console.log("player 1 wins");
       } else if (cellsFilled === 9) {
         console.log("Draw");
       }
     });
   }, [isX]);
+  console.log(winner);
   return (
     <>
       <div className="board">
@@ -115,6 +148,7 @@ function Board() {
             key={num}
             isElementX={showX[`showX${num}`]}
             isElementO={showO[`showO${num}`]}
+            winner={winner[`winner${num}`]}
             // inorder to prevent calling the onClick function to a Cell that already has an element in it...
             // ...it is necessary to check if a cell already has an element with the use of the ternary operator...
             // if either X or O is an element in the Cell don't pass handleCellClick as an onClick handler
