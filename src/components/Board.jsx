@@ -160,14 +160,12 @@ function Board({ handleWhosTurn, handlePlayer1Score, handlePlayer2Score }) {
       else if (
         cellsFilled === 9 &&
         !(
-          showX[`showX${cell1}`] &&
-          showX[`showX${cell2}`] &&
-          showX[`showX${cell3}`]
-        ) &&
-        !(
-          showO[`showO${cell1}`] &&
-          showO[`showO${cell2}`] &&
-          showO[`showO${cell3}`]
+          (showX[`showX${cell1}`] &&
+            showX[`showX${cell2}`] &&
+            showX[`showX${cell3}`]) ||
+          (showO[`showO${cell1}`] &&
+            showO[`showO${cell2}`] &&
+            showO[`showO${cell3}`])
         )
       ) {
         setVerdict("Draw");
