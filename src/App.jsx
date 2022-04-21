@@ -9,7 +9,6 @@ function App() {
       <Header />
       <Board />
       <p className="turn-mobile">Player 1's Turn</p>
-      <ResetButton onClick={"asdv"} />
     </div>
   );
 }
