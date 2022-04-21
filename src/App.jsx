@@ -29,6 +29,10 @@ function App() {
         handlePlayer2Score={handlePlayer2Score}
       />
       <p className="turn-mobile">Player {whosTurn}'s Turn</p>
+      <footer className="footer">
+        {" "}
+        Made by <a href="https://github.com/Michaeloye">Michael Oyebadejo</a>
+      </footer>
     </div>
   );
 }
