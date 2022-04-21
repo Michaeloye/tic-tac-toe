@@ -1,9 +1,12 @@
 import React from "react";
 import { BiCircle } from "react-icons/bi";
 
-function Cell({ isElementX, isElementO, onClick }) {
+function Cell({ isElementX, isElementO, winner, onClick }) {
   return (
-    <button className="cell" onClick={() => onClick()}>
+    <button
+      className={"cell " + winner ? "cell-won" : ""}
+      onClick={() => onClick()}
+    >
       {/* for X */}
       {isElementO && <BiCircle size={86} color={"white"} />}
 
