@@ -124,12 +124,14 @@ function Board({ handleWhosTurn, handlePlayer1Score, handlePlayer2Score }) {
       let cell1 = winningCombos[0];
       let cell2 = winningCombos[1];
       let cell3 = winningCombos[2];
+
       if (
         showO[`showO${cell1}`] &&
         showO[`showO${cell2}`] &&
         showO[`showO${cell3}`]
       ) {
         setWinnerDeclared(true);
+
         setWinner({
           ...winner,
           [`winner${cell1}`]: true,
@@ -145,6 +147,7 @@ function Board({ handleWhosTurn, handlePlayer1Score, handlePlayer2Score }) {
         showX[`showX${cell3}`]
       ) {
         setWinnerDeclared(true);
+
         setWinner({
           ...winner,
           [`winner${cell1}`]: true,
@@ -157,20 +160,12 @@ function Board({ handleWhosTurn, handlePlayer1Score, handlePlayer2Score }) {
         handlePlayer1Score();
       }
       // if the all 9 cells are filled and no winning sequence is true return draw
-      else if (
-        cellsFilled === 9 &&
-        !(
-          (showX[`showX${cell1}`] &&
-            showX[`showX${cell2}`] &&
-            showX[`showX${cell3}`]) ||
-          (showO[`showO${cell1}`] &&
-            showO[`showO${cell2}`] &&
-            showO[`showO${cell3}`])
-        )
-      ) {
+      else if (cellsFilled === 9 && !winnerDeclared) {
         setVerdict("Draw");
         handleModal(true);
       }
+
+      // if the all 9 cells are filled and no winning sequence is true return draw
     });
   }, [isX]);
   return (
