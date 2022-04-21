@@ -81,6 +81,45 @@
   cursor: pointer;
 }
 
+/* backdrop */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background: #00000096;
+}
+
+/* modal */
+.verdict-modal {
+  background-color: white;
+  position: relative;
+  width: clamp(30%, 300px, 70%);
+  height: 150px;
+  margin: auto;
+  padding: 0 2rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.verdict-modal .verdict {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.cancel {
+  position: absolute;
+  top: -40px;
+  right: -30px;
+  cursor: pointer;
+}
+
 @media screen and (min-width: 760px) {
   .turn-desktop {
     display: block;
