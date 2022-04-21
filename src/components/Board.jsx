@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Cell from "./Cell";
 import VerdictModal from "./Modal/VerdictModal";
 import ResetButton from "./Reset";
 
-function Board({ handleWhosTurn }) {
+function Board({ handleWhosTurn, handlePlayer1Score, handlePlayer2Score }) {
   const winningSequences = [
     [0, 1, 2],
     [3, 4, 5],
@@ -138,6 +138,7 @@ function Board({ handleWhosTurn }) {
         });
         setVerdict("Player 2 wins");
         handleModal(true);
+        handlePlayer2Score();
       } else if (
         showX[`showX${cell1}`] &&
         showX[`showX${cell2}`] &&
@@ -153,6 +154,7 @@ function Board({ handleWhosTurn }) {
 
         setVerdict("Player 1 wins");
         handleModal(true);
+        handlePlayer1Score();
       }
       // if the all 9 cells are filled and no winning sequence is true return draw
       else if (
