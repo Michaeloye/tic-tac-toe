@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Cell from "./Cell";
+import VerdictModal from "./Modal/VerdictModal";
 import ResetButton from "./Reset";
 
 function Board() {
@@ -16,6 +17,7 @@ function Board() {
 
   // the below state is to alternate between X and O taking X as the starting element
   const [isX, setIsX] = useState(true);
+
   // tracking the number of cells filled helps to determine when to declare 'Draw'
   const [cellsFilled, setCellsFilled] = useState(0);
 
@@ -55,6 +57,7 @@ function Board() {
 
   // if winnerDeclared is set to true the no cell will be clickable
   const [winnerDeclared, setWinnerDeclared] = useState(false);
+
   // this is needed to show the winning cells in green those making it unique to each cell
   const [winner, setWinner] = useState({
     winner0: false,
@@ -68,6 +71,10 @@ function Board() {
     winner8: false,
     winner9: false,
   });
+
+  const [verdict, setVerdict] = useState("");
+
+  const [showModal, setShowModal] = useState(false);
 
   const handleCellClick = (num) => {
     // set a particular cell element based on 'num' argument
@@ -102,6 +109,11 @@ function Board() {
     setShowO(false);
     setShowX(false);
     setCellsFilled(0);
+    setVerdict("");
+  };
+
+  const handleModal = (state) => {
+    setShowModal(state);
   };
 
   useEffect(() => {
@@ -121,7 +133,8 @@ function Board() {
           [`winner${cell2}`]: true,
           [`winner${cell3}`]: true,
         });
-        console.log("player 2 wins");
+        setVerdict("Player 2 wins");
+        handleModal(true);
       } else if (
         showX[`showX${cell1}`] &&
         showX[`showX${cell2}`] &&
@@ -135,9 +148,25 @@ function Board() {
           [`winner${cell3}`]: true,
         });
 
-        console.log("player 1 wins");
-      } else if (cellsFilled === 9) {
-        console.log("Draw");
+        setVerdict("Player 1 wins");
+        handleModal(true);
+      }
+      // if the all 9 cells are filled and no winning sequence is true return draw
+      else if (
+        cellsFilled === 9 &&
+        !(
+          showX[`showX${cell1}`] &&
+          showX[`showX${cell2}`] &&
+          showX[`showX${cell3}`]
+        ) &&
+        !(
+          showO[`showO${cell1}`] &&
+          showO[`showO${cell2}`] &&
+          showO[`showO${cell3}`]
+        )
+      ) {
+        setVerdict("Draw");
+        handleModal(true);
       }
     });
   }, [isX]);
@@ -163,6 +192,7 @@ function Board() {
         ))}
       </div>
       <ResetButton onClick={() => resetBoard()} />
+      {showModal && <VerdictModal text={verdict} handleClose={handleModal} />}
     </>
   );
 }
