@@ -1,5 +1,5 @@
 import React from "react";
-import Backdrop from "../Backdrop";
+import Backdrop from "../Backdrop/Backdrop";
 import { MdOutlineCancel } from "react-icons/md";
 import { AiFillTrophy } from "react-icons/ai";
 
