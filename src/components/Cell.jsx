@@ -4,7 +4,7 @@ import { BiCircle } from "react-icons/bi";
 function Cell({ isElementX, isElementO, winner, onClick }) {
   return (
     <button
-      className={"cell " + winner ? "cell-won" : ""}
+      className={"cell " + (winner ? "cell-won" : "")}
       onClick={() => onClick()}
     >
       {/* for X */}
