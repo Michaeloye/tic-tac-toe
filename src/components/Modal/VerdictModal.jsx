@@ -19,7 +19,8 @@ function VerdictModal({ handleClose, text }) {
           onClick={() => handleClose(false)}
         />
         <p className="verdict"> {text}</p>
-        <AiFillTrophy color={"#d4a010"} size={40} />
+        {/* do not show trophy for Draw */}
+        {text === "Draw" ? "" : <AiFillTrophy color={"#d4a010"} size={40} />}
       </div>
     </Backdrop>
   );
