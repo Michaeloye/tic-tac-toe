@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Cell from "./Cell";
 import ResetButton from "./Reset";
 
 function Board() {
-  const winningSequence = [
+  const winningSequences = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -14,9 +14,10 @@ function Board() {
     [2, 4, 6],
   ];
 
-  // the below state is to alternate between X and O taking X as our base case
+  // the below state is to alternate between X and O taking X as the starting element
   const [isX, setIsX] = useState(true);
-  // const [showO, setShowO] = useState(false);
+  // tracking the number of cells filled helps to determine when to declare 'Draw'
+  const [cellsFilled, setCellsFilled] = useState(0);
 
   // it was observed that with only one setState for each cell on rerender all cells will have the same
   // element either 'X' or 'O' because the state has been set so when the map function reruns it takes in
@@ -53,7 +54,7 @@ function Board() {
   });
 
   const handleCellClick = (num) => {
-    if (isX) {
+    if (isX && !showX[`showX${num}`]) {
       setShowX({
         ...showX,
         [`showX${num}`]: true,
@@ -73,12 +74,38 @@ function Board() {
       });
     }
     setIsX((prevState) => !prevState);
+    setCellsFilled((prevState) => prevState + 1);
   };
 
   const resetBoard = () => {
     setShowO(false);
     setShowX(false);
+    setIsX(true);
+    setCellsFilled(0);
   };
+
+  useEffect(() => {
+    winningSequences.forEach((winningCombos) => {
+      let cell1 = winningCombos[0];
+      let cell2 = winningCombos[1];
+      let cell3 = winningCombos[2];
+      if (
+        showO[`showO${cell1}`] &&
+        showO[`showO${cell2}`] &&
+        showO[`showO${cell3}`]
+      ) {
+        console.log("player 2 wins");
+      } else if (
+        showX[`showX${cell1}`] &&
+        showX[`showX${cell2}`] &&
+        showX[`showX${cell3}`]
+      ) {
+        console.log("player 1 wins");
+      } else if (cellsFilled === 9) {
+        console.log("Draw");
+      }
+    });
+  }, [isX]);
   return (
     <>
       <div className="board">
@@ -88,9 +115,13 @@ function Board() {
             key={num}
             isElementX={showX[`showX${num}`]}
             isElementO={showO[`showO${num}`]}
+            // inorder to prevent calling the onClick function to a Cell that already has an element in it...
+            // ...it is necessary to check if a cell already has an element with the use of the ternary operator...
+            // if either X or O is an element in the Cell don't pass handleCellClick as an onClick handler
             onClick={() => {
-              handleCellClick(num);
-              console.log(showX);
+              showX[`showX${num}`] || showO[`showO${num}`]
+                ? null
+                : handleCellClick(num);
             }}
           />
         ))}
