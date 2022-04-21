@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  background-color: hsl(210, 34%, 13%);
   min-height: 100vh;
 }
 
@@ -120,6 +119,14 @@
   cursor: pointer;
 }
 
+/* footer */
+.footer {
+  margin-top: 30px;
+  color: white;
+}
+.footer a {
+  color: hsl(214, 32%, 45%);
+}
 @media screen and (min-width: 760px) {
   .turn-desktop {
     display: block;
