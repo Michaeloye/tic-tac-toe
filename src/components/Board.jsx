@@ -53,6 +53,8 @@ function Board() {
     showX9: false,
   });
 
+  // if winnerDeclared is set to true the no cell will be clickable
+  const [winnerDeclared, setWinnerDeclared] = useState(false);
   // this is needed to show the winning cells in green those making it unique to each cell
   const [winner, setWinner] = useState({
     winner0: false,
@@ -68,6 +70,8 @@ function Board() {
   });
 
   const handleCellClick = (num) => {
+    // set a particular cell element based on 'num' argument
+
     if (isX && !showX[`showX${num}`]) {
       setShowX({
         ...showX,
@@ -93,6 +97,7 @@ function Board() {
 
   const resetBoard = () => {
     setIsX(true);
+    setWinnerDeclared(false);
     setWinner(false);
     setShowO(false);
     setShowX(false);
@@ -109,22 +114,20 @@ function Board() {
         showO[`showO${cell2}`] &&
         showO[`showO${cell3}`]
       ) {
+        setWinnerDeclared(true);
         setWinner({
           ...winner,
           [`winner${cell1}`]: true,
           [`winner${cell2}`]: true,
           [`winner${cell3}`]: true,
         });
-        // setShowO({
-        //   ...showO,
-        //   [`showO${num}`]: true,
-        // });
         console.log("player 2 wins");
       } else if (
         showX[`showX${cell1}`] &&
         showX[`showX${cell2}`] &&
         showX[`showX${cell3}`]
       ) {
+        setWinnerDeclared(true);
         setWinner({
           ...winner,
           [`winner${cell1}`]: true,
@@ -138,7 +141,6 @@ function Board() {
       }
     });
   }, [isX]);
-  console.log(winner);
   return (
     <>
       <div className="board">
@@ -153,7 +155,7 @@ function Board() {
             // ...it is necessary to check if a cell already has an element with the use of the ternary operator...
             // if either X or O is an element in the Cell don't pass handleCellClick as an onClick handler
             onClick={() => {
-              showX[`showX${num}`] || showO[`showO${num}`]
+              showX[`showX${num}`] || showO[`showO${num}`] || winnerDeclared
                 ? null
                 : handleCellClick(num);
             }}
